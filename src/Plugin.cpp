@@ -53,8 +53,6 @@ static float     gSmoothedFps = 0.0f;
 // ---- datarefs ----------------------------------------------------------------
 static XPLMDataRef gFrameRatePeriod = nullptr;
 static XPLMDataRef gICAORef         = nullptr;
-static XPLMDataRef gCPUFrameTime    = nullptr;
-static XPLMDataRef gGPUFrameTime    = nullptr;
 
 static std::string gCurrentICAO = "DEFAULT";
 
@@ -163,8 +161,6 @@ PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
 
     gFrameRatePeriod = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
     gICAORef         = XPLMFindDataRef("sim/aircraft/view/acf_ICAO");
-    gCPUFrameTime    = XPLMFindDataRef("sim/operation/misc/cpu_time_per_frame_sec");
-    gGPUFrameTime    = XPLMFindDataRef("sim/operation/misc/gpu_time_per_frame_sec");
 
     if (gICAORef) {
         char icao[8] = {};
@@ -324,24 +320,10 @@ void DrawWindow(XPLMWindowID id, void*) {
             break;
         case METRIC_FRAMETIME:
             if (gFrameRatePeriod)
-                snprintf(buf, sizeof(buf), "FT:     %.1f ms",
+                snprintf(buf, sizeof(buf), "FT:   %.1f ms",
                          XPLMGetDataf(gFrameRatePeriod) * 1000.0f);
             else
-                snprintf(buf, sizeof(buf), "FT:     ---");
-            break;
-        case METRIC_CPU_FT:
-            if (gCPUFrameTime)
-                snprintf(buf, sizeof(buf), "CPU FT: %.1f ms",
-                         XPLMGetDataf(gCPUFrameTime) * 1000.0f);
-            else
-                snprintf(buf, sizeof(buf), "CPU FT: ---");
-            break;
-        case METRIC_GPU_FT:
-            if (gGPUFrameTime)
-                snprintf(buf, sizeof(buf), "GPU FT: %.1f ms",
-                         XPLMGetDataf(gGPUFrameTime) * 1000.0f);
-            else
-                snprintf(buf, sizeof(buf), "GPU FT: ---");
+                snprintf(buf, sizeof(buf), "FT:   ---");
             break;
         case METRIC_VRAM:
             snprintf(buf, sizeof(buf), "VRAM: %.1f GB", gpu.GetVRAMUsedGB());

@@ -7,15 +7,13 @@ enum MetricID {
     METRIC_UPLOAD     = 1,
     METRIC_FPS        = 2,
     METRIC_FRAMETIME  = 3,
-    METRIC_CPU_FT     = 4,
-    METRIC_GPU_FT     = 5,
-    METRIC_VRAM       = 6,
-    METRIC_CPU        = 7,
-    METRIC_COUNT      = 8
+    METRIC_VRAM       = 4,
+    METRIC_CPU        = 5,
+    METRIC_COUNT      = 6
 };
 
 static const char* MetricNames[METRIC_COUNT] = {
-    "NIC", "UPLOAD", "FPS", "FRAMETIME", "CPU_FT", "GPU_FT", "VRAM", "CPU"
+    "NIC", "UPLOAD", "FPS", "FRAMETIME", "VRAM", "CPU"
 };
 
 static const char* MetricLabels[METRIC_COUNT] = {
@@ -23,8 +21,6 @@ static const char* MetricLabels[METRIC_COUNT] = {
     "Upload Mbps",
     "FPS",
     "Frame time ms",
-    "CPU frame time ms",
-    "GPU frame time ms",
     "VRAM used",
     "CPU usage %"
 };
