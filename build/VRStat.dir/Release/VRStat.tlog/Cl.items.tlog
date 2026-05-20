@@ -1,0 +1,5 @@
+C:\Dev\VRStat\src\Plugin.cpp;C:\Dev\VRStat\build\VRStat.dir\Release\Plugin.obj
+C:\Dev\VRStat\src\NetworkMonitor.cpp;C:\Dev\VRStat\build\VRStat.dir\Release\NetworkMonitor.obj
+C:\Dev\VRStat\src\GPUMonitor.cpp;C:\Dev\VRStat\build\VRStat.dir\Release\GPUMonitor.obj
+C:\Dev\VRStat\src\PDHMonitor.cpp;C:\Dev\VRStat\build\VRStat.dir\Release\PDHMonitor.obj
+C:\Dev\VRStat\src\Config.cpp;C:\Dev\VRStat\build\VRStat.dir\Release\Config.obj

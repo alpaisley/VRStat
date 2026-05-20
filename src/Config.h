@@ -9,11 +9,12 @@ enum MetricID {
     METRIC_FRAMETIME  = 3,
     METRIC_VRAM       = 4,
     METRIC_CPU        = 5,
-    METRIC_COUNT      = 6
+    METRIC_GPU_FT     = 6,  // GPU frame time ms
+    METRIC_COUNT      = 7
 };
 
 static const char* MetricNames[METRIC_COUNT] = {
-    "NIC", "UPLOAD", "FPS", "FRAMETIME", "VRAM", "CPU"
+    "NIC", "UPLOAD", "FPS", "FRAMETIME", "VRAM", "CPU", "GPU_FT"
 };
 
 static const char* MetricLabels[METRIC_COUNT] = {
@@ -22,12 +23,19 @@ static const char* MetricLabels[METRIC_COUNT] = {
     "FPS",
     "Frame time ms",
     "VRAM used",
-    "CPU usage %"
+    "CPU usage %",
+    "GPU frame time ms"
+};
+
+enum LayoutMode {
+    LAYOUT_VERTICAL   = 0,  // single column (original)
+    LAYOUT_HORIZONTAL = 1   // two columns, metrics paired left/right
 };
 
 struct Config {
     std::vector<MetricID> order;
-    bool enabled[METRIC_COUNT];
+    bool       enabled[METRIC_COUNT];
+    LayoutMode layout = LAYOUT_VERTICAL;
 
     void SetDefaults();
     bool Load(const std::string& path);

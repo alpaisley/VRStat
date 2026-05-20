@@ -1,0 +1,5 @@
+C:/Dev/VRStat/build/VRStat.dir/MinSizeRel/Plugin.obj
+C:/Dev/VRStat/build/VRStat.dir/MinSizeRel/NetworkMonitor.obj
+C:/Dev/VRStat/build/VRStat.dir/MinSizeRel/GPUMonitor.obj
+C:/Dev/VRStat/build/VRStat.dir/MinSizeRel/PDHMonitor.obj
+C:/Dev/VRStat/build/VRStat.dir/MinSizeRel/Config.obj

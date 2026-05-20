@@ -9,6 +9,7 @@ void Config::SetDefaults() {
         enabled[i] = true;
     }
     enabled[METRIC_CPU] = false;
+    layout = LAYOUT_VERTICAL;
 }
 
 static std::string Trim(const std::string& s) {
@@ -57,6 +58,19 @@ bool Config::Load(const std::string& path) {
                 if (m != METRIC_COUNT) newOrder.push_back(m);
             }
             if (!newOrder.empty()) order = newOrder;
+
+            // Append any metrics not present in the saved order (e.g. newly added ones).
+            // This prevents out-of-bounds access when METRIC_COUNT grows.
+            for (int i = 0; i < METRIC_COUNT; ++i) {
+                MetricID candidate = (MetricID)i;
+                bool found = false;
+                for (size_t j = 0; j < order.size(); ++j)
+                    if (order[j] == candidate) { found = true; break; }
+                if (!found) order.push_back(candidate);
+            }
+        }
+        else if (key == "LAYOUT") {
+            layout = (value == "HORIZONTAL") ? LAYOUT_HORIZONTAL : LAYOUT_VERTICAL;
         }
     }
     return true;
@@ -76,6 +90,7 @@ bool Config::Save(const std::string& path) const {
         f << MetricNames[order[i]];
     }
     f << "\n";
+    f << "LAYOUT=" << (layout == LAYOUT_HORIZONTAL ? "HORIZONTAL" : "VERTICAL") << "\n";
     return true;
 }
 

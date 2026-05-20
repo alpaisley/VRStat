@@ -1,0 +1,10 @@
+^C:\DEV\VRSTAT\BUILD\CMAKEFILES\6F522B25BCB477EA8AA63F4EE1F05981\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Dev/VRStat -BC:/Dev/VRStat/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Dev/VRStat/build/VRStat.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -25,7 +25,9 @@ static Config         cfgEdit;
 // ---- layout ------------------------------------------------------------------
 static const int LINE_H      = 20;
 static const int PAD         = 8;
-static const int WIN_W       = 220;
+static const int WIN_W       = 220;   // vertical mode width
+static const int WIN_W_2COL  = 380;   // horizontal mode width (two columns)
+static const int COL_W       = 180;   // width of each column in horizontal mode
 static const int NIC_W       = 400;
 static const int NIC_H       = 200;
 static const int SETUP_W     = 360;
@@ -53,6 +55,7 @@ static float     gSmoothedFps = 0.0f;
 // ---- datarefs ----------------------------------------------------------------
 static XPLMDataRef gFrameRatePeriod = nullptr;
 static XPLMDataRef gICAORef         = nullptr;
+static XPLMDataRef gGpuTimeSec      = nullptr;  // sim/time/gpu_time_per_frame_sec_approx
 
 static std::string gCurrentICAO = "DEFAULT";
 
@@ -61,6 +64,7 @@ static float gCyan[3]   = { 0.40f, 1.00f, 0.85f };
 static float gGreen[3]  = { 0.00f, 1.00f, 0.00f };
 static float gYellow[3] = { 1.00f, 1.00f, 0.00f };
 static float gOrange[3] = { 1.00f, 0.50f, 0.00f };
+static float gRed[3]    = { 1.00f, 0.15f, 0.15f };
 static float gWhite[3]  = { 1.00f, 1.00f, 1.00f };
 static float gGrey[3]   = { 0.55f, 0.55f, 0.55f };
 static float gMuted[3]  = { 0.50f, 0.70f, 0.65f };
@@ -92,12 +96,24 @@ static std::string LoadNICPref() {
 }
 
 // ---- geometry helpers --------------------------------------------------------
+static int MainWindowRows() {
+    // vertical: one row per enabled metric
+    // horizontal: ceil(enabled / 2) rows
+    int n = cfg.EnabledCount();
+    if (cfg.layout == LAYOUT_HORIZONTAL)
+        return (n + 1) / 2;
+    return n;
+}
 static int MainWindowHeight() {
-    return PAD + cfg.EnabledCount() * LINE_H + PAD;
+    return PAD + MainWindowRows() * LINE_H + PAD;
+}
+static int MainWindowWidth() {
+    return (cfg.layout == LAYOUT_HORIZONTAL) ? WIN_W_2COL : WIN_W;
 }
 static int SetupWindowHeight() {
     return PAD + 30
          + METRIC_COUNT * SETUP_LINE_H
+         + SETUP_LINE_H          // layout toggle row
          + PAD + SETUP_LINE_H + PAD;
 }
 
@@ -162,10 +178,44 @@ PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
     gFrameRatePeriod = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
     gICAORef         = XPLMFindDataRef("sim/aircraft/view/acf_ICAO");
 
+    // GPU frame time: probed below via DataRefs.txt scanner
+
     if (gICAORef) {
         char icao[8] = {};
         XPLMGetDatab(gICAORef, icao, 0, 7);
         if (icao[0]) gCurrentICAO = std::string(icao);
+    }
+
+    // GPU frame time — scan DataRefs.txt for gpu+time candidates, use first that resolves
+    {
+        char sysPath[512] = {};
+        XPLMGetSystemPath(sysPath);
+        std::string dataRefsTxt = std::string(sysPath) + "Resources/plugins/DataRefs.txt";
+
+        std::vector<std::string> gpuCandidates;
+        gpuCandidates.push_back("sim/operation/misc/gpu_time");
+        gpuCandidates.push_back("sim/operation/misc/gpu_time_ms");
+        gpuCandidates.push_back("sim/private/stats/frame_gpu_time");
+        gpuCandidates.push_back("sim/private/stats/gpu_time");
+
+        std::ifstream drf(dataRefsTxt);
+        if (drf.is_open()) {
+            std::string line;
+            while (std::getline(drf, line)) {
+                size_t tab = line.find('\t');
+                std::string path = (tab != std::string::npos) ? line.substr(0, tab) : line;
+                std::string lower = path;
+                for (char& c : lower) c = (char)tolower((unsigned char)c);
+                if (lower.find("gpu") != std::string::npos &&
+                    lower.find("time") != std::string::npos)
+                    gpuCandidates.push_back(path);
+            }
+        }
+
+        for (const auto& c : gpuCandidates) {
+            XPLMDataRef dr = XPLMFindDataRef(c.c_str());
+            if (dr) { gGpuTimeSec = dr; break; }
+        }
     }
 
     gpu.Initialize();
@@ -187,7 +237,7 @@ PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
     // Create all windows hidden at a dummy position.
     // They will be properly positioned/shown when VR is entered or from the menu.
     int wh = MainWindowHeight();
-    windowId = MakeWindow(0, wh, WIN_W, 0,
+    windowId = MakeWindow(0, wh, MainWindowWidth(), 0,
                           DrawWindow, HandleMouseClick, HandleCursor);
     XPLMSetWindowIsVisible(windowId, 0);
 
@@ -293,49 +343,90 @@ void DrawWindow(XPLMWindowID id, void*) {
     XPLMGetWindowGeometry(id, &l, &t, &r, &b);
     XPLMDrawTranslucentDarkBox(l, t, r, b);
 
-    int y = t - PAD - 10;
-    for (size_t i = 0; i < cfg.order.size(); ++i) {
-        MetricID m = cfg.order[i];
-        if (!cfg.enabled[m]) continue;
+    // Build list of enabled metrics in order
+    std::vector<MetricID> active;
+    for (size_t i = 0; i < cfg.order.size(); ++i)
+        if (cfg.enabled[cfg.order[i]]) active.push_back(cfg.order[i]);
 
-        char buf[64] = {};
+    // Helper lambda: format a metric into buf and return its colour
+    auto FormatMetric = [&](MetricID m, char* buf, size_t bufSz) -> float* {
         float* col = gCyan;
-
         switch (m) {
         case METRIC_NIC: {
             std::string name = monitor.GetAdapterName();
             if (name.length() > 22) name = name.substr(0, 22) + "..";
-            snprintf(buf, sizeof(buf), "NIC:  %s", name.c_str());
+            snprintf(buf, bufSz, "NIC:  %s", name.c_str());
             break;
         }
-        case METRIC_UPLOAD:
-            snprintf(buf, sizeof(buf), "Up:   %.2f Mbps", monitor.GetTxMbps());
+        case METRIC_UPLOAD: {
+            double mbps = monitor.GetTxMbps();
+            snprintf(buf, bufSz, "Up:   %.2f Mbps", mbps);
+            if      (mbps > 130.0) col = gGreen;
+            else if (mbps > 100.0) col = gOrange;
+            else                   col = gRed;
             break;
+        }
         case METRIC_FPS:
-            if (gSmoothedFps > 0.0f) snprintf(buf, sizeof(buf), "FPS:  %.0f", gSmoothedFps);
-            else                     snprintf(buf, sizeof(buf), "FPS:  ---");
+            if (gSmoothedFps > 0.0f) snprintf(buf, bufSz, "FPS:  %.0f", gSmoothedFps);
+            else                     snprintf(buf, bufSz, "FPS:  ---");
             if      (gSmoothedFps >= 40.0f) col = gGreen;
             else if (gSmoothedFps >= 25.0f) col = gYellow;
             else                            col = gOrange;
             break;
         case METRIC_FRAMETIME:
             if (gFrameRatePeriod)
-                snprintf(buf, sizeof(buf), "FT:   %.1f ms",
+                snprintf(buf, bufSz, "FT:   %.1f ms",
                          XPLMGetDataf(gFrameRatePeriod) * 1000.0f);
             else
-                snprintf(buf, sizeof(buf), "FT:   ---");
+                snprintf(buf, bufSz, "FT:   ---");
             break;
         case METRIC_VRAM:
-            snprintf(buf, sizeof(buf), "VRAM: %.1f GB", gpu.GetVRAMUsedGB());
+            snprintf(buf, bufSz, "VRAM: %.1f GB", gpu.GetVRAMUsedGB());
             break;
-        case METRIC_CPU:
-            snprintf(buf, sizeof(buf), "CPU:  %.0f%%", pdh.GetCPUPercent());
+        case METRIC_CPU: {
+            float cpu = pdh.GetCPUPercent();
+            snprintf(buf, bufSz, "CPU:  %.0f%%", cpu);
+            if      (cpu < 50.0f) col = gGreen;
+            else if (cpu < 80.0f) col = gOrange;
+            else                  col = gRed;
+            break;
+        }
+        case METRIC_GPU_FT:
+            if (gGpuTimeSec)
+                snprintf(buf, bufSz, "GPU-FT: %.1f ms", XPLMGetDataf(gGpuTimeSec) * 1000.0f);
+            else
+                snprintf(buf, bufSz, "GPU-FT: ---");
             break;
         default: break;
         }
+        return col;
+    };
 
-        XPLMDrawString(col, l + PAD, y, buf, nullptr, kFont);
-        y -= LINE_H;
+    if (cfg.layout == LAYOUT_VERTICAL) {
+        int y = t - PAD - 10;
+        for (size_t i = 0; i < active.size(); ++i) {
+            char buf[64] = {};
+            float* col = FormatMetric(active[i], buf, sizeof(buf));
+            XPLMDrawString(col, l + PAD, y, buf, nullptr, kFont);
+            y -= LINE_H;
+        }
+    } else {
+        // Horizontal: two columns, metrics paired left/right
+        int y = t - PAD - 10;
+        for (size_t i = 0; i < active.size(); i += 2) {
+            // Left column
+            char bufL[64] = {};
+            float* colL = FormatMetric(active[i], bufL, sizeof(bufL));
+            XPLMDrawString(colL, l + PAD, y, bufL, nullptr, kFont);
+
+            // Right column (if a metric exists for this row)
+            if (i + 1 < active.size()) {
+                char bufR[64] = {};
+                float* colR = FormatMetric(active[i + 1], bufR, sizeof(bufR));
+                XPLMDrawString(colR, l + PAD + COL_W, y, bufR, nullptr, kFont);
+            }
+            y -= LINE_H;
+        }
     }
 }
 
@@ -413,6 +504,7 @@ void DrawSetupWindow(XPLMWindowID id, void*) {
     XPLMDrawString(gMuted,  l + 8,  t - 28, "Toggle and reorder. Save to apply.", nullptr, kFont);
 
     for (int row = 0; row < METRIC_COUNT; ++row) {
+        if (row >= (int)cfgEdit.order.size()) break;  // safety: should never happen
         MetricID m = cfgEdit.order[row];
         int y = SetupRowY(t, row);
 
@@ -426,6 +518,14 @@ void DrawSetupWindow(XPLMWindowID id, void*) {
         XPLMDrawString(upCol, r - 38, y, "[^]", nullptr, kFont);
         XPLMDrawString(dnCol, r - 18, y, "[v]", nullptr, kFont);
     }
+
+    // Layout toggle row (below metrics)
+    int layoutY = SetupRowY(t, METRIC_COUNT);
+    XPLMDrawString(gMuted,  l + 8,   layoutY, "Layout:", nullptr, kFont);
+    float* vertCol  = (cfgEdit.layout == LAYOUT_VERTICAL)   ? gGreen : gGrey;
+    float* horizCol = (cfgEdit.layout == LAYOUT_HORIZONTAL) ? gGreen : gGrey;
+    XPLMDrawString(vertCol,  l + 70,  layoutY, "[Vertical]",   nullptr, kFont);
+    XPLMDrawString(horizCol, l + 180, layoutY, "[Horizontal]", nullptr, kFont);
 
     int btnY = b + PAD + 4;
     XPLMDrawString(gGreen,  l + 40,        btnY, "[ Save ]",   nullptr, kFont);
@@ -452,9 +552,10 @@ int HandleSetupMouseClick(XPLMWindowID id, int x, int y, int isDown, void*) {
             cfg = cfgEdit;
             cfg.Save(gCfgPath);
             int wh = MainWindowHeight();
+            int ww = MainWindowWidth();
             int wl, wt, wr, wb;
             XPLMGetWindowGeometry(windowId, &wl, &wt, &wr, &wb);
-            XPLMSetWindowGeometry(windowId, wl, wt, wl + WIN_W, wt - wh);
+            XPLMSetWindowGeometry(windowId, wl, wt, wl + ww, wt - wh);
             XPLMSetWindowIsVisible(setupWindowId, 0);
             setupWindowVisible = false;
             return 1;
@@ -465,6 +566,16 @@ int HandleSetupMouseClick(XPLMWindowID id, int x, int y, int isDown, void*) {
             setupWindowVisible = false;
             return 1;
         }
+    }
+
+    // Layout toggle row
+    int layoutY = SetupRowY(t, METRIC_COUNT);
+    if (y >= layoutY - 4 && y <= layoutY + 14) {
+        if (x >= l + 70 && x <= l + 170)
+            cfgEdit.layout = LAYOUT_VERTICAL;
+        else if (x >= l + 180 && x <= l + 310)
+            cfgEdit.layout = LAYOUT_HORIZONTAL;
+        return 1;
     }
 
     // Row toggle / reorder
@@ -498,9 +609,10 @@ void MenuHandler(void*, void* itemRef) {
         if (!vis) {
             // Reapply correct size when showing in case config changed
             int wh = MainWindowHeight();
+            int ww = MainWindowWidth();
             int wl, wt, wr, wb;
             XPLMGetWindowGeometry(windowId, &wl, &wt, &wr, &wb);
-            XPLMSetWindowGeometry(windowId, wl, wt, wl + WIN_W, wt - wh);
+            XPLMSetWindowGeometry(windowId, wl, wt, wl + ww, wt - wh);
         }
         XPLMSetWindowIsVisible(windowId, vis ? 0 : 1);
 

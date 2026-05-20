@@ -1,0 +1,3 @@
+C:/Dev/VRStat/build/CMakeFiles/VRStat.dir
+C:/Dev/VRStat/build/CMakeFiles/ALL_BUILD.dir
+C:/Dev/VRStat/build/CMakeFiles/ZERO_CHECK.dir
