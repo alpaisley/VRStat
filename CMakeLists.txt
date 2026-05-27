@@ -29,6 +29,7 @@ add_library(VRStat SHARED
     src/NetworkMonitor.cpp
     src/GPUMonitor.cpp
     src/PDHMonitor.cpp
+    src/TempMonitor.cpp
     src/Config.cpp
 )
 
@@ -37,6 +38,9 @@ target_link_libraries(VRStat
     iphlpapi
     dxgi
     pdh
+    wbemuuid
+    ole32
+    oleaut32
     "${XPLANE_SDK}/Libraries/Win/XPLM_64.lib"
     "${XPLANE_SDK}/Libraries/Win/XPWidgets_64.lib"
 )

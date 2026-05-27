@@ -2,4 +2,5 @@ C:/Dev/VRStat/build/VRStat.dir/Release/Plugin.obj
 C:/Dev/VRStat/build/VRStat.dir/Release/NetworkMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Release/GPUMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Release/PDHMonitor.obj
+C:/Dev/VRStat/build/VRStat.dir/Release/TempMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Release/Config.obj

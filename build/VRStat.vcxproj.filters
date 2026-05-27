@@ -13,6 +13,9 @@
     <ClCompile Include="C:\Dev\VRStat\src\PDHMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Dev\VRStat\src\TempMonitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Dev\VRStat\src\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

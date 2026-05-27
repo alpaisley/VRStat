@@ -10,11 +10,13 @@ enum MetricID {
     METRIC_VRAM       = 4,
     METRIC_CPU        = 5,
     METRIC_GPU_FT     = 6,  // GPU frame time ms
-    METRIC_COUNT      = 7
+    METRIC_CPU_TEMP   = 7,  // CPU temp C (WMI)
+    METRIC_GPU_TEMP   = 8,  // GPU temp C (NVML)
+    METRIC_COUNT      = 9
 };
 
 static const char* MetricNames[METRIC_COUNT] = {
-    "NIC", "UPLOAD", "FPS", "FRAMETIME", "VRAM", "CPU", "GPU_FT"
+    "NIC", "UPLOAD", "FPS", "FRAMETIME", "VRAM", "CPU", "GPU_FT", "CPU_TEMP", "GPU_TEMP"
 };
 
 static const char* MetricLabels[METRIC_COUNT] = {
@@ -22,9 +24,11 @@ static const char* MetricLabels[METRIC_COUNT] = {
     "Upload Mbps",
     "FPS",
     "Frame time ms",
-    "VRAM used",
+    "VRAM used %",
     "CPU usage %",
-    "GPU frame time ms"
+    "GPU frame time ms",
+    "CPU temp C",
+    "GPU temp C"
 };
 
 enum LayoutMode {

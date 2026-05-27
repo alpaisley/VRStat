@@ -8,6 +8,7 @@
 #include "NetworkMonitor.h"
 #include "GPUMonitor.h"
 #include "PDHMonitor.h"
+#include "TempMonitor.h"
 #include "Config.h"
 #include <string>
 #include <vector>
@@ -19,13 +20,14 @@
 static NetworkMonitor monitor;
 static GPUMonitor     gpu;
 static PDHMonitor     pdh;
+static TempMonitor    temps;
 static Config         cfg;
 static Config         cfgEdit;
 
 // ---- layout ------------------------------------------------------------------
 static const int LINE_H      = 20;
 static const int PAD         = 8;
-static const int WIN_W       = 220;   // vertical mode width
+static const int WIN_W       = 260;   // vertical mode width
 static const int WIN_W_2COL  = 380;   // horizontal mode width (two columns)
 static const int COL_W       = 180;   // width of each column in horizontal mode
 static const int NIC_W       = 400;
@@ -222,6 +224,19 @@ PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
     pdh.Initialize();
     monitor.Initialize();
 
+    // Log startup info to X-Plane's Log.txt
+    {
+        std::string msg = "VRStat: startup, dir=" + dir + "\n";
+        XPLMDebugString(msg.c_str());
+    }
+
+    temps.Initialize(dir);
+    XPLMDebugString(temps.GetLog().c_str());
+
+    // Ensure new metrics added since last save are enabled by default
+    cfg.enabled[METRIC_CPU_TEMP] = cfg.enabled[METRIC_CPU_TEMP];
+    cfg.enabled[METRIC_GPU_TEMP] = cfg.enabled[METRIC_GPU_TEMP];
+
     const std::vector<std::string>& nics = monitor.GetNICNames();
     if (!nics.empty()) {
         std::string saved = LoadNICPref();
@@ -270,6 +285,7 @@ PLUGIN_API void XPluginStop(void) {
     XPLMUnregisterFlightLoopCallback(FlightLoopCallback, nullptr);
     pdh.Shutdown();
     gpu.Shutdown();
+    temps.Shutdown();
     if (windowId)      XPLMDestroyWindow(windowId);
     if (nicWindowId)   XPLMDestroyWindow(nicWindowId);
     if (setupWindowId) XPLMDestroyWindow(setupWindowId);
@@ -308,6 +324,7 @@ float FlightLoopCallback(float, float, int, void*) {
     monitor.Update();
     gpu.Update();
     pdh.Update();
+    temps.Update();
 
     // Track aircraft changes
     if (gICAORef) {
@@ -373,30 +390,76 @@ void DrawWindow(XPLMWindowID id, void*) {
             else if (gSmoothedFps >= 25.0f) col = gYellow;
             else                            col = gOrange;
             break;
-        case METRIC_FRAMETIME:
-            if (gFrameRatePeriod)
-                snprintf(buf, bufSz, "FT:   %.1f ms",
-                         XPLMGetDataf(gFrameRatePeriod) * 1000.0f);
-            else
+        case METRIC_FRAMETIME: {
+            if (gFrameRatePeriod) {
+                float ft = XPLMGetDataf(gFrameRatePeriod) * 1000.0f;
+                snprintf(buf, bufSz, "FT:   %.1f ms", ft);
+                if      (ft < 25.0f) col = gGreen;   // >40fps
+                else if (ft < 33.3f) col = gOrange;  // >30fps
+                else                 col = gRed;      // <30fps
+            } else {
                 snprintf(buf, bufSz, "FT:   ---");
+            }
             break;
-        case METRIC_VRAM:
-            snprintf(buf, bufSz, "VRAM: %.1f GB", gpu.GetVRAMUsedGB());
+        }
+        case METRIC_VRAM: {
+            float used   = gpu.GetVRAMUsedGB();
+            float budget = gpu.GetVRAMBudgetGB();
+            if (budget > 0.0f) {
+                float pct = used / budget * 100.0f;
+                snprintf(buf, bufSz, "VRAM: %.0f%%", pct);
+                if      (pct < 60.0f) col = gGreen;
+                else if (pct < 80.0f) col = gOrange;
+                else                  col = gRed;
+            } else {
+                snprintf(buf, bufSz, "VRAM: ---");
+            }
             break;
+        }
         case METRIC_CPU: {
             float cpu = pdh.GetCPUPercent();
             snprintf(buf, bufSz, "CPU:  %.0f%%", cpu);
             if      (cpu < 50.0f) col = gGreen;
-            else if (cpu < 80.0f) col = gOrange;
+            else if (cpu < 75.0f) col = gOrange;
             else                  col = gRed;
             break;
         }
-        case METRIC_GPU_FT:
-            if (gGpuTimeSec)
-                snprintf(buf, bufSz, "GPU-FT: %.1f ms", XPLMGetDataf(gGpuTimeSec) * 1000.0f);
-            else
+        case METRIC_GPU_FT: {
+            if (gGpuTimeSec) {
+                float ft = XPLMGetDataf(gGpuTimeSec) * 1000.0f;
+                snprintf(buf, bufSz, "GPU-FT: %.1f ms", ft);
+                if      (ft < 25.0f) col = gGreen;
+                else if (ft < 33.3f) col = gOrange;
+                else                 col = gRed;
+            } else {
                 snprintf(buf, bufSz, "GPU-FT: ---");
+            }
             break;
+        }
+        case METRIC_CPU_TEMP: {
+            if (temps.HasCPUTemp()) {
+                float t = temps.GetCPUTempC();
+                snprintf(buf, bufSz, "CPU-T: %.0f C", t);
+                if      (t <= 60.0f) col = gGreen;
+                else if (t <= 75.0f) col = gOrange;
+                else                 col = gRed;
+            } else {
+                snprintf(buf, bufSz, "CPU-T: ---");
+            }
+            break;
+        }
+        case METRIC_GPU_TEMP: {
+            if (temps.HasGPUTemp()) {
+                float t = temps.GetGPUTempC();
+                snprintf(buf, bufSz, "GPU-T: %.0f C", t);
+                if      (t <= 60.0f) col = gGreen;
+                else if (t <= 75.0f) col = gOrange;
+                else                 col = gRed;
+            } else {
+                snprintf(buf, bufSz, "GPU-T: ---");
+            }
+            break;
+        }
         default: break;
         }
         return col;

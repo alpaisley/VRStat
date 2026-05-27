@@ -2,4 +2,5 @@ C:/Dev/VRStat/build/VRStat.dir/Debug/Plugin.obj
 C:/Dev/VRStat/build/VRStat.dir/Debug/NetworkMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Debug/GPUMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Debug/PDHMonitor.obj
+C:/Dev/VRStat/build/VRStat.dir/Debug/TempMonitor.obj
 C:/Dev/VRStat/build/VRStat.dir/Debug/Config.obj
