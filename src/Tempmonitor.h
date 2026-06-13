@@ -12,6 +12,7 @@ public:
     bool  HasCPUTemp()   const { return cpuAvailable; }
     bool  HasGPUTemp()   const { return gpuAvailable; }
     const std::string& GetLog() const { return initLog; }
+    void ClearLog() { initLog.clear(); initLog.shrink_to_fit(); }
 
 private:
     std::string pluginDir;

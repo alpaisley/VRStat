@@ -6,6 +6,7 @@
 #include <iphlpapi.h>
 #include <chrono>
 #include <cstring>
+#include <vector>
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "ws2_32.lib")
 
@@ -101,10 +102,18 @@ void NetworkMonitor::BuildList() {
 void NetworkMonitor::Update() {
     if (selectedNICIndex >= nicList.size()) return;
 
-    DWORD size = 0;
-    GetIfTable(nullptr, &size, FALSE);
-    PMIB_IFTABLE ifTable = (PMIB_IFTABLE)malloc(size);
-    if (!ifTable) return;
+    // Use a static buffer to avoid malloc/free every call
+    static std::vector<BYTE> ifTableBuf;
+    DWORD size = (DWORD)ifTableBuf.size();
+
+    // Resize if needed
+    if (GetIfTable(nullptr, &size, FALSE) == ERROR_INSUFFICIENT_BUFFER) {
+        ifTableBuf.resize(size);
+    }
+    if (ifTableBuf.empty()) return;
+
+    PMIB_IFTABLE ifTable = (PMIB_IFTABLE)ifTableBuf.data();
+    size = (DWORD)ifTableBuf.size();
 
     if (GetIfTable(ifTable, &size, FALSE) == NO_ERROR) {
         unsigned long targetIndex = nicList[selectedNICIndex].ifIndex;
@@ -124,7 +133,6 @@ void NetworkMonitor::Update() {
             }
         }
     }
-    free(ifTable);
 }
 
 std::string NetworkMonitor::GetAdapterName() {

@@ -232,6 +232,7 @@ PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
 
     temps.Initialize(dir);
     XPLMDebugString(temps.GetLog().c_str());
+    temps.ClearLog();
 
     // Ensure new metrics added since last save are enabled by default
     cfg.enabled[METRIC_CPU_TEMP] = cfg.enabled[METRIC_CPU_TEMP];
@@ -324,7 +325,10 @@ float FlightLoopCallback(float, float, int, void*) {
     monitor.Update();
     gpu.Update();
     pdh.Update();
-    temps.Update();
+
+    // Temps only need updating every 2 seconds
+    static int tempSkip = 0;
+    if (++tempSkip >= 4) { temps.Update(); tempSkip = 0; }
 
     // Track aircraft changes
     if (gICAORef) {

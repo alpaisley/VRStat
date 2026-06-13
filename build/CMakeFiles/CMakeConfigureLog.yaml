@@ -49,6 +49,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "message-v1"
     backtrace:
@@ -65,7 +66,7 @@ events:
       The output was:
       0
       MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-      Build started 27/05/2026 13:12:53.
+      Build started 13/06/2026 13:31:20.
       
       Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\4.3.0-rc1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -94,7 +95,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.50
+      Time Elapsed 00:00:00.81
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -141,6 +142,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.com"
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.exe"
@@ -160,6 +162,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -197,6 +200,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.exe"
@@ -243,6 +247,9 @@ events:
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link.com"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link.exe"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link"
     found: false
     search_context:
       ENV{PATH}:
@@ -260,6 +267,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -295,6 +303,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.com"
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.exe"
@@ -314,6 +323,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -349,6 +359,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mt.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mt.exe"
@@ -395,6 +406,9 @@ events:
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/mt"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/mt.com"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/mt.exe"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/mt"
     found: false
     search_context:
       ENV{PATH}:
@@ -412,6 +426,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -447,6 +462,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lib.com"
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lib.exe"
@@ -466,6 +482,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -507,6 +524,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "message-v1"
     backtrace:
@@ -523,7 +541,7 @@ events:
       The output was:
       0
       MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-      Build started 27/05/2026 13:12:53.
+      Build started 13/06/2026 13:31:21.
       
       Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\4.3.0-rc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -552,7 +570,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.49
+      Time Elapsed 00:00:00.52
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -599,6 +617,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
     searched_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.exe"
@@ -645,6 +664,9 @@ events:
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link.com"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link.exe"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/lld-link"
     found: false
     search_context:
       ENV{PATH}:
@@ -662,6 +684,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
   -
     kind: "find-v1"
     backtrace:
@@ -699,6 +722,7 @@ events:
       - "C:/Users/alpai/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Users/alpai/.dotnet/tools/"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -754,6 +778,9 @@ events:
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
       - "C:/Users/alpai/AppData/Local/Programs/Microsoft VS Code/bin/rc"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/rc.com"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/rc.exe"
+      - "C:/Users/alpai/AppData/Local/GitHubDesktop/bin/rc"
       - "C:/Program Files/bin/rc.com"
       - "C:/Program Files/bin/rc.exe"
       - "C:/Program Files/bin/rc"
@@ -807,6 +834,7 @@ events:
         - "C:\\Users\\alpai\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\alpai\\.dotnet\\tools"
         - "C:\\Users\\alpai\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\alpai\\AppData\\Local\\GitHubDesktop\\bin"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/VRStat"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -822,8 +850,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-5szn0t"
-      binary: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-5szn0t"
+      source: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-z5svzs"
+      binary: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-z5svzs"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
@@ -833,33 +861,33 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-5szn0t'
+        Change Dir: 'C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-z5svzs'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0f0dc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_34664.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 27/05/2026 13:12:54.
+        Build started 13/06/2026 13:31:23.
         
-        Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5szn0t\\cmTC_0f0dc.vcxproj" on node 1 (default targets).
+        Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z5svzs\\cmTC_34664.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5szn0t\\Debug\\".
-          Creating directory "cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.tlog\\".
+          Creating directory "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z5svzs\\Debug\\".
+          Creating directory "cmTC_34664.dir\\Debug\\cmTC_34664.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.tlog\\unsuccessfulbuild".
+          Creating "cmTC_34664.dir\\Debug\\cmTC_34664.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_34664.dir\\Debug\\cmTC_34664.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0f0dc.dir\\Debug\\\\" /Fd"cmTC_0f0dc.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_34664.dir\\Debug\\\\" /Fd"cmTC_34664.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35724 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0f0dc.dir\\Debug\\\\" /Fd"cmTC_0f0dc.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_34664.dir\\Debug\\\\" /Fd"cmTC_34664.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5szn0t\\Debug\\cmTC_0f0dc.exe" /INCREMENTAL /ILK:"cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-5szn0t/Debug/cmTC_0f0dc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-5szn0t/Debug/cmTC_0f0dc.lib" /MACHINE:X64  /machine:x64 cmTC_0f0dc.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_0f0dc.vcxproj -> C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5szn0t\\Debug\\cmTC_0f0dc.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z5svzs\\Debug\\cmTC_34664.exe" /INCREMENTAL /ILK:"cmTC_34664.dir\\Debug\\cmTC_34664.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-z5svzs/Debug/cmTC_34664.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-z5svzs/Debug/cmTC_34664.lib" /MACHINE:X64  /machine:x64 cmTC_34664.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_34664.vcxproj -> C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z5svzs\\Debug\\cmTC_34664.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.tlog\\unsuccessfulbuild".
-          Touching "cmTC_0f0dc.dir\\Debug\\cmTC_0f0dc.tlog\\cmTC_0f0dc.lastbuildstate".
-        Done Building Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-5szn0t\\cmTC_0f0dc.vcxproj" (default targets).
+          Deleting file "cmTC_34664.dir\\Debug\\cmTC_34664.tlog\\unsuccessfulbuild".
+          Touching "cmTC_34664.dir\\Debug\\cmTC_34664.tlog\\cmTC_34664.lastbuildstate".
+        Done Building Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-z5svzs\\cmTC_34664.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
@@ -905,8 +933,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-zl2dsk"
-      binary: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-zl2dsk"
+      source: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-10iqk4"
+      binary: "C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-10iqk4"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -917,39 +945,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-zl2dsk'
+        Change Dir: 'C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-10iqk4'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_74316.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_1d6b1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 27/05/2026 13:12:55.
+        Build started 13/06/2026 13:31:23.
         
-        Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zl2dsk\\cmTC_74316.vcxproj" on node 1 (default targets).
+        Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-10iqk4\\cmTC_1d6b1.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zl2dsk\\Debug\\".
-          Creating directory "cmTC_74316.dir\\Debug\\cmTC_74316.tlog\\".
+          Creating directory "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-10iqk4\\Debug\\".
+          Creating directory "cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_74316.dir\\Debug\\cmTC_74316.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_74316.dir\\Debug\\cmTC_74316.tlog\\unsuccessfulbuild".
+          Creating "cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_74316.dir\\Debug\\\\" /Fd"cmTC_74316.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_1d6b1.dir\\Debug\\\\" /Fd"cmTC_1d6b1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35724 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_74316.dir\\Debug\\\\" /Fd"cmTC_74316.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_1d6b1.dir\\Debug\\\\" /Fd"cmTC_1d6b1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zl2dsk\\Debug\\cmTC_74316.exe" /INCREMENTAL /ILK:"cmTC_74316.dir\\Debug\\cmTC_74316.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-zl2dsk/Debug/cmTC_74316.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-zl2dsk/Debug/cmTC_74316.lib" /MACHINE:X64  /machine:x64 cmTC_74316.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_74316.vcxproj -> C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zl2dsk\\Debug\\cmTC_74316.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-10iqk4\\Debug\\cmTC_1d6b1.exe" /INCREMENTAL /ILK:"cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-10iqk4/Debug/cmTC_1d6b1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Dev/VRStat/build/CMakeFiles/CMakeScratch/TryCompile-10iqk4/Debug/cmTC_1d6b1.lib" /MACHINE:X64  /machine:x64 cmTC_1d6b1.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_1d6b1.vcxproj -> C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-10iqk4\\Debug\\cmTC_1d6b1.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_74316.dir\\Debug\\cmTC_74316.tlog\\unsuccessfulbuild".
-          Touching "cmTC_74316.dir\\Debug\\cmTC_74316.tlog\\cmTC_74316.lastbuildstate".
-        Done Building Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-zl2dsk\\cmTC_74316.vcxproj" (default targets).
+          Deleting file "cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.tlog\\unsuccessfulbuild".
+          Touching "cmTC_1d6b1.dir\\Debug\\cmTC_1d6b1.tlog\\cmTC_1d6b1.lastbuildstate".
+        Done Building Project "C:\\Dev\\VRStat\\build\\CMakeFiles\\CMakeScratch\\TryCompile-10iqk4\\cmTC_1d6b1.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.48
+        Time Elapsed 00:00:00.47
         
       exitCode: 0
   -

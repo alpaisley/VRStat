@@ -234,7 +234,11 @@ void TempMonitor::UpdateCPUFallback() {
             if(n>0) cpuTempC=tot/(float)n;
         } return;
     }
+    // WMI fallback — only query every 5 seconds to avoid overhead
     if(!pSvcCPU) return;
+    static int wmiSkip = 0;
+    if(++wmiSkip < 10) return;  // flight loop runs at 0.5s, so 10 = 5 seconds
+    wmiSkip = 0;
     IWbemServices* pS=(IWbemServices*)pSvcCPU;
     IEnumWbemClassObject* pE=nullptr;
     if(FAILED(pS->ExecQuery(_bstr_t(L"WQL"),
